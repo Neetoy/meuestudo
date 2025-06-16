@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para o Amor da Minha Vida</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 3em;
+      animation: pulse 2s infinite;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background-color: #fff;
+      color: #ff6f91;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #heart {
+      font-size: 5em;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      text-align: center;
+    }
+
+    .mini-heart {
+      position: absolute;
+      font-size: 1.5em;
+      animation: float 2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    #goose {
+      position: absolute;
+      bottom: 0;
+      width: 100px;
+      animation: moveGoose 10s linear infinite alternate;
+    }
+
+    #pato {
+        width: 500px;
+    }
+
+    @keyframes moveGoose {
+      0% {
+        left: -100px;
+        transform: scaleX(1);
+      }
+      100% {
+        left: 100%;
+        transform: scaleX(-1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Eu te amo 💖</h1>
+  <button onclick="showHeart()">Clique para a surpresa</button>
+  <div id="heart">❤️</div>
+
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+  <center>
+  <img id="pato" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExODUzcGJvcmFhZHV6cTY4d2Q5MHZyOHV1am5naGsyZ2szejVtOWZsZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ws9ksgMH6nbGemB3Yh/giphy.gif" alt="Pato andando" />
+  </center>
+
+  <script>
+    function showHeart() {
+      const heart = document.getElementById('heart');
+      heart.style.opacity = 1;
+      document.getElementById('bgMusic').play();
+
+      for (let i = 0; i < 20; i++) {
+        createMiniHeart();
+      }
+    }
+
+    function createMiniHeart() {
+      const mini = document.createElement('div');
+      mini.className = 'mini-heart';
+      mini.textContent = '❤️';
+
+      const heart = document.getElementById('heart');
+      mini.style.left = (heart.offsetLeft + heart.offsetWidth / 2) + 'px';
+      mini.style.top = (heart.offsetTop + heart.offsetHeight / 2) + 'px';
+
+      const x = (Math.random() - 0.5) * 300 + 'px';
+      const y = (Math.random() - 0.5) * 300 + 'px';
+      mini.style.setProperty('--x', x);
+      mini.style.setProperty('--y', y);
+
+      document.body.appendChild(mini);
+
+      setTimeout(() => {
+        mini.remove();
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
